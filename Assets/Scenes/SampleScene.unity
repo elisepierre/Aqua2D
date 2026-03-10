@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 268201452}
   - component: {fileID: 268201451}
   - component: {fileID: 268201450}
+  - component: {fileID: 268201455}
   m_Layer: 0
   m_Name: Far_Background
   m_TagString: Untagged
@@ -238,11 +239,23 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.41, y: -0.01, z: 0.036034074}
-  m_LocalScale: {x: 20, y: 10.2, z: 0}
+  m_LocalScale: {x: 20, y: 10.2, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &268201455
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268201449}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +389,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: -10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -393,7 +406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60cc65f8093ba604eb585546b1787cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +501,7 @@ GameObject:
   - component: {fileID: 968669918}
   - component: {fileID: 968669917}
   - component: {fileID: 968669916}
+  - component: {fileID: 968669921}
   m_Layer: 0
   m_Name: Foreground
   m_TagString: Untagged
@@ -591,7 +604,80 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.41, y: -0.00999999, z: 0.036034074}
-  m_LocalScale: {x: 30, y: 10.2, z: 10}
+  m_LocalScale: {x: 30, y: 10.2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &968669921
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968669915}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_SortAtRoot: 0
+--- !u!1 &1229507689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1229507692}
+  - component: {fileID: 1229507691}
+  - component: {fileID: 1229507690}
+  m_Layer: 0
+  m_Name: TrashSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!210 &1229507690
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229507689}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
+  m_SortAtRoot: 1
+--- !u!114 &1229507691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229507689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdbe340bc4574f4f96ca7fc3e6be69f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trashPrefabs:
+  - {fileID: 1005827088578754466, guid: 209fcac687623a34b8a55340a22610c4, type: 3}
+  spawnRate: 1.5
+  xRange: 4
+--- !u!4 &1229507692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229507689}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6, z: -0.03416889}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -609,6 +695,7 @@ GameObject:
   - component: {fileID: 1388924712}
   - component: {fileID: 1388924711}
   - component: {fileID: 1388924710}
+  - component: {fileID: 1388924715}
   m_Layer: 0
   m_Name: Sand_Background
   m_TagString: Untagged
@@ -716,6 +803,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &1388924715
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388924709}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -725,3 +824,4 @@ SceneRoots:
   - {fileID: 268201454}
   - {fileID: 1388924714}
   - {fileID: 968669920}
+  - {fileID: 1229507692}
