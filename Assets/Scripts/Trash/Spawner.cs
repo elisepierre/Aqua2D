@@ -20,4 +20,11 @@ public class Spawner : MonoBehaviour
 
         Instantiate(trashPrefabs[randomIndex], spawnPos, Quaternion.identity);
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(new Vector3(transform.position.x - xRange, transform.position.y, 0),
+                        new Vector3(transform.position.x + xRange, transform.position.y, 0));
+    }
 }
