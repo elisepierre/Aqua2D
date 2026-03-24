@@ -4,6 +4,7 @@ public class TrashItem : MonoBehaviour
 {
     void OnMouseDown()
     {
+        if (Time.timeScale == 0) return;
         Destroy(gameObject);
     }
 
