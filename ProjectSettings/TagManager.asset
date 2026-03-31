@@ -51,3 +51,6 @@ TagManager:
   - name: foregound
     uniqueID: 2165788351
     locked: 0
+  - name: front
+    uniqueID: 1971459209
+    locked: 0
