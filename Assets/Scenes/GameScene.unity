@@ -1227,10 +1227,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trashPrefabs:
-  - {fileID: 1005827088578754466, guid: 209fcac687623a34b8a55340a22610c4, type: 3}
-  - {fileID: 1233146846025767399, guid: 8694ad505b62f6843b969355d0f4994b, type: 3}
+  - {fileID: 2193728813895910777, guid: 560749ef1fa324b49bcadf054054b101, type: 3}
+  - {fileID: 4050475949992091411, guid: 41453227ee0405a43aab451b1b649595, type: 3}
+  - {fileID: 5575663147414585830, guid: 48c4b77630346a341b0e341458a76c45, type: 3}
+  - {fileID: 5382364370904771138, guid: e505597512e4d8a4fb69a617e960faa0, type: 3}
+  - {fileID: 973579647713917138, guid: 7ac68b23f2445d14aaeddf1005325a5f, type: 3}
+  - {fileID: 6337583895373468054, guid: 208684a2161c25846bc1c7e800ef84c5, type: 3}
   spawnRate: 1.5
-  xRange: 2.8
+  xRange: 2.2
 --- !u!4 &1229507692
 Transform:
   m_ObjectHideFlags: 0
@@ -1543,8 +1547,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c9ae4a39741ebf94bae07062df17603d, type: 2}
-  m_sharedMaterial: {fileID: 4712276286138323104, guid: c9ae4a39741ebf94bae07062df17603d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -5367,16 +5367,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386138214}
-  m_LocalRotation: {x: -0, y: -0, z: 0.19677629, w: 0.9804484}
+  m_LocalRotation: {x: -0, y: -0, z: 0.19017455, w: 0.98175025}
   m_LocalPosition: {x: 0, y: 0, z: -4.9999695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 12347097}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 22.697}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 21.926}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 69, y: -511}
+  m_AnchoredPosition: {x: 71.98103, y: -509.7767}
   m_SizeDelta: {x: 892.3181, y: 478.8696}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &386138216
@@ -6113,7 +6113,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 822251433}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: LoadStory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6608,16 +6608,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134046155}
-  m_LocalRotation: {x: -0, y: -0, z: 0.19677629, w: 0.9804484}
+  m_LocalRotation: {x: -0, y: -0, z: 0.19017455, w: 0.98175025}
   m_LocalPosition: {x: 0, y: 0, z: -4.9999695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 12347097}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 22.697}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 21.926}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 69, y: -511}
+  m_AnchoredPosition: {x: 71.98103, y: -509.7767}
   m_SizeDelta: {x: 892.3181, y: 478.8696}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1134046157
