@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 3784918333398925222}
   - component: {fileID: 8490546206088847751}
   - component: {fileID: 2569823730572735693}
+  - component: {fileID: 4963121975653893173}
   - component: {fileID: 1367991098795795497}
-  - component: {fileID: 7391133879032695641}
   - component: {fileID: 1239135065761585957}
   m_Layer: 0
   m_Name: trashes_5
-  m_TagString: Untagged
+  m_TagString: Trash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +115,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4963121975653893173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337583895373468054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883a99a92a1d16243ba3952dacf63dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDragDistance: 0.5
 --- !u!70 &1367991098795795497
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -150,18 +163,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.69, y: 1.56}
   m_Direction: 0
---- !u!114 &7391133879032695641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6337583895373468054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab6175c896824c479e739dcab4b3dcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!210 &1239135065761585957
 SortingGroup:
   m_ObjectHideFlags: 0
