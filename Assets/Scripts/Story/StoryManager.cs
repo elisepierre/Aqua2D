@@ -60,7 +60,7 @@ public class StoryManager : MonoBehaviour
                 break;
 
             case 5:
-                SceneManager.LoadScene("GameScene");
+                SceneManager.LoadScene("ReflexGameScene");
                 break;
         }
     }

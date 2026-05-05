@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/StoryScene.unity
     guid: 7755be386f93a5a4ea91e258b5bc1065
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/ReflexGameScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects: {}
