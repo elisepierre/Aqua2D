@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Trash
   - Hook
+  - Obstacle
+  - Shell
   layers:
   - Default
   - TransparentFX
