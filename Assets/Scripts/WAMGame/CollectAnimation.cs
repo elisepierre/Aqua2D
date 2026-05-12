@@ -13,7 +13,6 @@ public class CollectAnimation : MonoBehaviour
         transform.SetParent(null);
         StartCoroutine(MoveAndFade(targetIcon));
     }
-
     IEnumerator MoveAndFade(RectTransform targetIcon)
     {
         Vector3 startPos = transform.position;

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI; 
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -9,15 +8,17 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     public TextMeshProUGUI timeText;
+    public TextMeshProUGUI scoreText;
+    public GameObject gameOverPanel;
 
-    public GameObject pauseButtonObject;
-    public GameObject playButtonObject;
-
-    public Image[] heartImages;
+    [Header("Collect Settings")]
+    public RectTransform globalScoreIcon;
+    public GameObject collectAnimPrefab;
 
     private float timer = 0f;
-    private int lives = 3;
+    private int score = 0;
     private bool isPaused = false;
+    private bool isGameOver = false;
 
     void Awake()
     {
@@ -25,17 +26,9 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    void Start()
-    {
-        UpdateLivesUI();
-
-        pauseButtonObject.SetActive(true);
-        playButtonObject.SetActive(false);
-    }
-
     void Update()
     {
-        if (!isPaused)
+        if (!isPaused && !isGameOver)
         {
             timer += Time.deltaTime;
             UpdateTimeUI();
@@ -46,56 +39,26 @@ public class GameManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(timer / 60f);
         int seconds = Mathf.FloorToInt(timer % 60f);
-
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public void LoseLife()
+    public void AddScore(int amount)
     {
-        lives--;
-        UpdateLivesUI();
-        if (lives <= 0) GameOver();
+        score += amount;
+        scoreText.text = "" + score;
     }
 
-    void UpdateLivesUI()
+    public void TriggerGameOver()
     {
-        for (int i = 0; i < heartImages.Length; i++)
-        {
-            if (i < lives)
-            {
-                heartImages[i].enabled = true;
-            }
-            else
-            {
-                heartImages[i].enabled = false;
-            }
-        }
+        if (isGameOver) return;
+        isGameOver = true;
+        Time.timeScale = 0f;
+        gameOverPanel.SetActive(true);
     }
 
-    public void TogglePause()
+    public void RestartGame()
     {
-        isPaused = !isPaused;
-
-        if (isPaused)
-        {
-            Time.timeScale = 0f;
-
-            pauseButtonObject.SetActive(false);
-            playButtonObject.SetActive(true);
-        }
-        else
-        {
-            Time.timeScale = 1f;
-
-            pauseButtonObject.SetActive(true);
-            playButtonObject.SetActive(false);
-        }
-    }
-
-    void GameOver()
-    {
-        Debug.Log("GAME OVER");
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

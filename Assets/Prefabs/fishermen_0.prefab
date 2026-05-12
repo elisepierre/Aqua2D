@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2608935527874395590
 Transform:
   m_ObjectHideFlags: 0
@@ -147,3 +147,6 @@ MonoBehaviour:
   activeTime: 3
   moveDistance: 2
   moveSpeed: 5
+  collectAnimationPrefab: {fileID: 0}
+  scoreIconRect: {fileID: 0}
+  currentHoleIndex: -1

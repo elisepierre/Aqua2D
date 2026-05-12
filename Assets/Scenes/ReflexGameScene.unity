@@ -348,9 +348,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 402304292}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: TogglePause
+      - m_Target: {fileID: 402304294}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -408,6 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 402304293}
   - component: {fileID: 402304292}
+  - component: {fileID: 402304294}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -428,9 +429,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 1401897197}
-  pauseButtonObject: {fileID: 340020534}
-  playButtonObject: {fileID: 859600314}
-  heartImages: []
+  scoreText: {fileID: 635086149}
+  gameOverPanel: {fileID: 956895251}
+  globalScoreIcon: {fileID: 136333225}
+  collectAnimPrefab: {fileID: 7016054304766849348, guid: 598569517bba3e2428d19a9b1a29f352, type: 3}
 --- !u!4 &402304293
 Transform:
   m_ObjectHideFlags: 0
@@ -446,6 +448,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &402304294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402304291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97df1358e2948a94aa4737c5e0ea7aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseButton: {fileID: 340020534}
+  playButton: {fileID: 859600314}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +474,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -583,6 +600,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,7 +850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &859600315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -881,9 +914,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 402304292}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: TogglePause
+      - m_Target: {fileID: 402304294}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1207,6 +1240,7 @@ MonoBehaviour:
   - {fileID: 5382364370904771138, guid: e505597512e4d8a4fb69a617e960faa0, type: 3}
   - {fileID: 973579647713917138, guid: 7ac68b23f2445d14aaeddf1005325a5f, type: 3}
   - {fileID: 6337583895373468054, guid: 208684a2161c25846bc1c7e800ef84c5, type: 3}
+  shellPrefab: {fileID: 7016054304766849348, guid: 598569517bba3e2428d19a9b1a29f352, type: 3}
   spawnRate: 1.5
   xRange: 2.2
 --- !u!4 &1229507692

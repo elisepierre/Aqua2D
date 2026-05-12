@@ -3,28 +3,30 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject[] trashPrefabs;
+    public GameObject shellPrefab;
     public float spawnRate = 1.5f;
     public float xRange = 4f;
 
     void Start()
     {
-        InvokeRepeating("SpawnTrash", 0f, spawnRate);
+        InvokeRepeating("SpawnLogic", 0.5f, spawnRate);
     }
 
-    void SpawnTrash()
+    void SpawnLogic()
     {
-        int randomIndex = Random.Range(0, trashPrefabs.Length);
+        GameObject prefabToSpawn;
+
+        if (Random.value < 0.3f)
+        {
+            prefabToSpawn = shellPrefab;
+        }
+        else
+        {
+            prefabToSpawn = trashPrefabs[Random.Range(0, trashPrefabs.Length)];
+        }
 
         float randomX = Random.Range(-xRange, xRange);
         Vector3 spawnPos = new Vector3(randomX, transform.position.y, 0);
-
-        Instantiate(trashPrefabs[randomIndex], spawnPos, Quaternion.identity);
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(new Vector3(transform.position.x - xRange, transform.position.y, 0),
-                        new Vector3(transform.position.x + xRange, transform.position.y, 0));
+        Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
     }
 }
