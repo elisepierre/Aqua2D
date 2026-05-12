@@ -1020,6 +1020,8 @@ MonoBehaviour:
   score: 0
   scoreText: {fileID: 396533784}
   loosePanel: {fileID: 1042029636}
+  collectAnimPrefab: {fileID: 7016054304766849348, guid: 8fbee1477c8fa8742a7b5eea0022893b, type: 3}
+  scoreIcon: {fileID: 1557327244}
 --- !u!1 &1202412733
 GameObject:
   m_ObjectHideFlags: 0
