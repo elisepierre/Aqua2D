@@ -22,16 +22,20 @@ public class StoryManager : MonoBehaviour
 
     private int step = 0;
 
+    public void UpdateDialog()
+    {
+        int lang = PlayerPrefs.GetInt("SelectedLanguage", 0);
+        dialogText.text = LanguageManager.instance.GetStoryDialog(step, lang);
+    }
+
     void Start()
     {
         mermaidImage.sprite = mermaidHappy;
-
         foreach (GameObject t in trash) t.SetActive(false);
         fisherman.SetActive(false);
 
-        dialogText.text = "Our home is beautiful and peaceful...";
+        UpdateDialog();
     }
-
     public void NextStep()
     {
         step++;
@@ -42,12 +46,12 @@ public class StoryManager : MonoBehaviour
                 mermaidImage.sprite = mermaidPanic;
 
                 foreach (GameObject t in trash) t.SetActive(true);
-                dialogText.text = "But suddenly... trash is invading our water!";
+                UpdateDialog(); 
                 break;
 
             case 2:
                 fisherman.SetActive(true);
-                dialogText.text = "Fishermen are taking my friends away...";
+                UpdateDialog();
                 break;
 
             case 3:
@@ -56,7 +60,7 @@ public class StoryManager : MonoBehaviour
                 break;
 
             case 4:
-                dialogText.text = "Please, traveler, you must help us clean and save the ocean!";
+                UpdateDialog();
                 break;
 
             case 5:
@@ -72,6 +76,6 @@ public class StoryManager : MonoBehaviour
             f.SetActive(false);
             yield return new WaitForSeconds(0.5f);
         }
-        dialogText.text = "I am all alone now...";
+        UpdateDialog();
     }
 }

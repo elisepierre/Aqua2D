@@ -7,4 +7,9 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("StoryScene");
     }
+
+    public void LoadChoice()
+    {
+        SceneManager.LoadScene("ChoiceScene");
+    }
 }
