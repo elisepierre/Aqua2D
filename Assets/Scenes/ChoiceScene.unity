@@ -5792,6 +5792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565616097}
+  - component: {fileID: 565616098}
   m_Layer: 0
   m_Name: CleanOcean
   m_TagString: Untagged
@@ -5808,7 +5809,7 @@ Transform:
   m_GameObject: {fileID: 565616096}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 550.93616, y: 854.1987, z: -8.600097}
+  m_LocalPosition: {x: 550.91, y: 854.1987, z: -8.600097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5817,6 +5818,27 @@ Transform:
   - {fileID: 1191387319}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &565616098
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565616096}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f43eabf0c40b23c4ebf485a1223cf9b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &649014894
 GameObject:
   m_ObjectHideFlags: 0
@@ -7839,7 +7861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffect: {fileID: 1086585075}
-  HookAnimator: {fileID: 0}
+  HookAnimator: {fileID: 565616098}
   Trash1Animator: {fileID: 0}
   Trash2Animator: {fileID: 0}
   playButtonClean: {fileID: 649014894}
@@ -8265,8 +8287,8 @@ Transform:
   m_GameObject: {fileID: 1695836111}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1708, y: 3.3666, z: 0}
-  m_LocalScale: {x: 2.3652287, y: 2.5182054, z: 1}
+  m_LocalPosition: {x: -0.1708, y: 4.3501, z: 0}
+  m_LocalScale: {x: 2.3652287, y: 9.074605, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
