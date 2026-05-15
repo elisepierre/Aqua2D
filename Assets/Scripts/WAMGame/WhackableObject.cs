@@ -18,6 +18,11 @@ public class WhackableObject : MonoBehaviour
     private Vector3 targetPos;
     private bool wasHit = false;
 
+    [Header("Vfx Whack")]
+    public Sprite dizzySprite;
+    public GameObject hammerPrefab;
+    public float delayBeforeDestroy = 0.4f;
+
     void OnEnable()
     {
         startPos = transform.position;
@@ -60,9 +65,22 @@ public class WhackableObject : MonoBehaviour
 
         if (currentHoleIndex != -1) WhackManager.Instance.ReleaseHole(currentHoleIndex);
 
+        if (hammerPrefab != null)
+        {
+            Vector3 hammerPos = transform.position + new Vector3(-0.4f, 0.9f, -1f);
+            GameObject hammer = Instantiate(hammerPrefab, hammerPos, Quaternion.identity);
+            hammer.transform.SetParent(null);
+            hammer.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        }
+
+        if (dizzySprite != null)
+        {
+            GetComponent<SpriteRenderer>().sprite = dizzySprite;
+        }
+
         if (isBadGuy)
         {
-            Destroy(gameObject);
+            StartCoroutine(HitAndDisappear());
         }
         else
         {
@@ -71,7 +89,6 @@ public class WhackableObject : MonoBehaviour
             if (collectAnimationPrefab != null)
             {
                 GameObject animObj = Instantiate(collectAnimationPrefab, transform.position, Quaternion.identity);
-
                 animObj.GetComponent<CollectAnimation>().StartAnimation(WhackManager.Instance.globalScoreIcon);
             }
 
@@ -88,5 +105,16 @@ public class WhackableObject : MonoBehaviour
             transform.position = Vector3.Lerp(from, to, t);
             yield return null;
         }
+    }
+
+    IEnumerator HitAndDisappear()
+    {
+        transform.position += new Vector3(0.1f, 0, 0);
+        yield return new WaitForSeconds(0.05f);
+        transform.position -= new Vector3(0.1f, 0, 0);
+
+        yield return new WaitForSeconds(delayBeforeDestroy);
+
+        Destroy(gameObject);
     }
 }

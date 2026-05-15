@@ -102,6 +102,12 @@ MonoBehaviour:
   activeTime: 3
   moveDistance: 2
   moveSpeed: 5
+  collectAnimationPrefab: {fileID: 0}
+  scoreIconRect: {fileID: 0}
+  currentHoleIndex: -1
+  dizzySprite: {fileID: 1938539937, guid: 1e07f42781d4e034e8a33f9b657828d3, type: 3}
+  hammerPrefab: {fileID: 820419989709954370, guid: 4e74c7bb0b25dd34f857fae82c6e0943, type: 3}
+  delayBeforeDestroy: 0.4
 --- !u!61 &673260835193515716
 BoxCollider2D:
   m_ObjectHideFlags: 0
