@@ -5503,6 +5503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 365759360}
+  - component: {fileID: 365759361}
   m_Layer: 0
   m_Name: FisherWhack
   m_TagString: Untagged
@@ -5527,6 +5528,27 @@ Transform:
   - {fileID: 47575755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &365759361
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365759359}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0d34b33d6737954dad49f9cf296353d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &412298195
 GameObject:
   m_ObjectHideFlags: 0
@@ -5584,7 +5606,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1971459209
   m_SortingLayer: 5
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 0babdd574f5a0104797a9604ef927f84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5605,8 +5627,8 @@ Transform:
   m_GameObject: {fileID: 412298195}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -4.108, z: 0}
-  m_LocalScale: {x: 0.5737872, y: 0.2960029, z: 0.75}
+  m_LocalPosition: {x: -0.01, y: -4.1247, z: 0}
+  m_LocalScale: {x: 0.5737872, y: 0.33714733, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -8062,15 +8084,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffect: {fileID: 1086585075}
-  HookAnimator: {fileID: 565616098}
-  Trash1Animator: {fileID: 0}
-  Trash2Animator: {fileID: 0}
+  cleanOceanAnimator: {fileID: 565616098}
   playButtonClean: {fileID: 649014894}
   scrollEffect: {fileID: 727963096}
   fishAnimator: {fileID: 2023749754}
   rockAnimator: {fileID: 1663390739}
   playButtonSwim: {fileID: 980036406}
-  fisherContainer: {fileID: 2688871892468823341, guid: b00aabc2132961b42b06a88bca3dc3c4, type: 3}
+  fisherWhackAnimator: {fileID: 365759361}
   playButtonWhack: {fileID: 768903579}
 --- !u!4 &1549882392
 Transform:
@@ -8383,7 +8403,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1971459209
   m_SortingLayer: 5
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 811ba7da82dd3b74fa67f1da94571279, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8467,7 +8487,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1971459209
   m_SortingLayer: 5
-  m_SortingOrder: 10
+  m_SortingOrder: 19
   m_Sprite: {fileID: 21300000, guid: e8584a7f8badaac49bdd12b6ac381caf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

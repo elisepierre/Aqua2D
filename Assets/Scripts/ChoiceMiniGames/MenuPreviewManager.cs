@@ -8,9 +8,7 @@ public class MenuPreviewManager : MonoBehaviour
 
     [Header("Clean Ocean Preview")]
     public MonoBehaviour parallaxEffect;
-    public Animator HookAnimator;
-    public Animator Trash1Animator;
-    public Animator Trash2Animator;
+    public Animator cleanOceanAnimator;
     public GameObject playButtonClean;
 
     [Header("Swim Rush Preview")]
@@ -20,7 +18,7 @@ public class MenuPreviewManager : MonoBehaviour
     public GameObject playButtonSwim;
 
     [Header("Fisher Whack Preview")]
-    public GameObject fisherContainer;
+    public Animator fisherWhackAnimator;
     public GameObject playButtonWhack;
 
     void Start()
@@ -36,20 +34,10 @@ public class MenuPreviewManager : MonoBehaviour
 
         if (parallaxEffect != null) parallaxEffect.enabled = true;
 
-        if (HookAnimator != null)
+        if (cleanOceanAnimator != null)
         {
-            HookAnimator.ResetTrigger("StopDemo");
-            HookAnimator.SetTrigger("StartDemo");
-        }
-        if (Trash1Animator != null)
-        {
-            Trash1Animator.ResetTrigger("StopDemo");
-            Trash1Animator.SetTrigger("StartDemo");
-        }
-        if (Trash2Animator != null)
-        {
-            Trash2Animator.ResetTrigger("StopDemo");
-            Trash2Animator.SetTrigger("StartDemo");
+            cleanOceanAnimator.ResetTrigger("StopDemo");
+            cleanOceanAnimator.SetTrigger("StartDemo");
         }
         playButtonClean.SetActive(true);
     }
@@ -57,7 +45,6 @@ public class MenuPreviewManager : MonoBehaviour
     public void OnClickSwimRush()
     {
         if (currentState == PreviewState.Swim) return;
-
         ResetAllPreviews();
         currentState = PreviewState.Swim;
 
@@ -68,7 +55,6 @@ public class MenuPreviewManager : MonoBehaviour
             fishAnimator.ResetTrigger("StopDemo");
             fishAnimator.SetTrigger("StartDemo");
         }
-
         if (rockAnimator != null)
         {
             rockAnimator.ResetTrigger("StopDemo");
@@ -77,14 +63,18 @@ public class MenuPreviewManager : MonoBehaviour
 
         playButtonSwim.SetActive(true);
     }
+
     public void OnClickFisherWhack()
     {
         if (currentState == PreviewState.Whack) return;
-
         ResetAllPreviews();
         currentState = PreviewState.Whack;
 
-        if (fisherContainer != null) fisherContainer.SetActive(true);
+        if (fisherWhackAnimator != null)
+        {
+            fisherWhackAnimator.ResetTrigger("StopDemo");
+            fisherWhackAnimator.SetTrigger("StartDemo");
+        }
         playButtonWhack.SetActive(true);
     }
 
@@ -95,17 +85,14 @@ public class MenuPreviewManager : MonoBehaviour
         if (parallaxEffect != null) parallaxEffect.enabled = false;
         if (scrollEffect != null) scrollEffect.enabled = false;
 
-        if (fisherContainer != null) fisherContainer.SetActive(false);
-
         if (playButtonClean != null) playButtonClean.SetActive(false);
         if (playButtonSwim != null) playButtonSwim.SetActive(false);
         if (playButtonWhack != null) playButtonWhack.SetActive(false);
 
-        if (HookAnimator != null) HookAnimator.SetTrigger("StopDemo");
-        if (Trash1Animator != null) Trash1Animator.SetTrigger("StopDemo");
-        if (Trash2Animator != null) Trash2Animator.SetTrigger("StopDemo");
+        if (cleanOceanAnimator != null) cleanOceanAnimator.SetTrigger("StopDemo");
         if (fishAnimator != null) fishAnimator.SetTrigger("StopDemo");
         if (rockAnimator != null) rockAnimator.SetTrigger("StopDemo");
+        if (fisherWhackAnimator != null) fisherWhackAnimator.SetTrigger("StopDemo");
     }
 
     public void LoadReflexGame() => SceneManager.LoadScene("ReflexGameScene");
