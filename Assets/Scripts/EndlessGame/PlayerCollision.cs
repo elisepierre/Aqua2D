@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -9,11 +10,29 @@ public class PlayerCollision : MonoBehaviour
     public GameObject collectAnimPrefab;
     public RectTransform scoreIcon;
 
+    void Awake()
+    {
+        score = 0;
+    }
+    void Start()
+    {
+        Time.timeScale = 1f;
+        if (scoreText != null)
+        {
+            scoreText.text = "0";
+        }
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Obstacle"))
         {
             Debug.Log("LOSER !");
+
+            if (DataManager.Instance != null)
+            {
+                DataManager.Instance.AddShellsToTotal(score);
+            }
+
             loosePanel.SetActive(true);
             Time.timeScale = 0f;
         }
@@ -32,5 +51,15 @@ public class PlayerCollision : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("LinkScene");
     }
 }
