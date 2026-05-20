@@ -64,7 +64,7 @@ public class StoryManager : MonoBehaviour
                 break;
 
             case 5:
-                SceneManager.LoadScene("ChoiceScene");
+                SceneManager.LoadScene("LinkScene");
                 break;
         }
     }

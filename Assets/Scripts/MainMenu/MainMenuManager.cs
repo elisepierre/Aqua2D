@@ -10,6 +10,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void LoadChoice()
     {
-        SceneManager.LoadScene("ChoiceScene");
+        SceneManager.LoadScene("LinkScene");
     }
 }
