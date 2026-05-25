@@ -1,21 +1,29 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    [Header("UI Elements")]
     public GameObject pauseButton;
-    public GameObject playButton;
+    public GameObject pausePanel;
 
     public void PauseGame()
     {
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
-        playButton.SetActive(true);
+        pausePanel.SetActive(true);
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         pauseButton.SetActive(true);
-        playButton.SetActive(false);
+        pausePanel.SetActive(false);
+    }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("LinkScene");
     }
 }

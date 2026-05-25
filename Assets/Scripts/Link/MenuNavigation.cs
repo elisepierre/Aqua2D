@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuNavigation : MonoBehaviour
@@ -20,7 +20,19 @@ public class MenuNavigation : MonoBehaviour
 
     public void LoadLinkScene()
     {
-        SceneManager.LoadScene("LinkScene");
+        GachaponManager gacha = FindObjectOfType<GachaponManager>();
+
+        if (gacha != null)
+        {
+            if (gacha.isUiActive)
+            {
+                Debug.Log("Retour bloqué : Tirage en cours !");
+                return;
+            }
+        }
+
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LinkScene");
     }
 
 }

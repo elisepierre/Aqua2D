@@ -8,6 +8,7 @@ TagManager:
   - Hook
   - Obstacle
   - Shell
+  - ScoreText
   layers:
   - Default
   - TransparentFX
@@ -59,4 +60,7 @@ TagManager:
     locked: 0
   - name: front
     uniqueID: 1971459209
+    locked: 0
+  - name: ball
+    uniqueID: 1383786835
     locked: 0

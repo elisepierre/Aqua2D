@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StopManager : MonoBehaviour
 {
+    [Header("UI Panels")]
     public GameObject stopButton;
-    public GameObject playButton;
+    public GameObject pausePanel;
     public GameObject loosePanel;
 
     public void StopGame()
@@ -13,13 +15,19 @@ public class StopManager : MonoBehaviour
 
         Time.timeScale = 0f;
         stopButton.SetActive(false);
-        playButton.SetActive(true);
+        pausePanel.SetActive(true);
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         stopButton.SetActive(true);
-        playButton.SetActive(false);
+        pausePanel.SetActive(false);
+    }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1f;       
+        SceneManager.LoadScene("LinkScene");
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class WhackManager : MonoBehaviour
 {
@@ -102,8 +103,28 @@ public class WhackManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (Time.timeScale == 0) return;
+
         CancelInvoke();
+
+        if (DataManager.Instance != null)
+        {
+            DataManager.Instance.AddShellsToTotal(score);
+        }
+
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("LinkScene");
     }
 }

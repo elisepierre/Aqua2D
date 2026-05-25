@@ -52,8 +52,20 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver) return;
         isGameOver = true;
+
+        if (DataManager.Instance != null)
+        {
+            DataManager.Instance.AddShellsToTotal(score);
+        }
+
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
+    }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("LinkScene");
     }
 
     public void RestartGame()
