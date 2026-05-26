@@ -1,14 +1,18 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
     public int score = 0;
+    private System.Collections.Generic.HashSet<int> collectedShells = new System.Collections.Generic.HashSet<int>();
     public TextMeshProUGUI scoreText;
     public GameObject loosePanel;
     public GameObject collectAnimPrefab;
     public RectTransform scoreIcon;
+    private int lastFrameChecked = -1;
+    private float lastCollectTime = 0f;
+    private float collectDelay = 0.1f;
 
     void Awake()
     {
@@ -26,7 +30,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.CompareTag("Obstacle"))
         {
-            Debug.Log("LOSER !");
+            Debug.Log("COLLISION OBSTACLE !");
 
             if (DataManager.Instance != null)
             {
@@ -34,22 +38,37 @@ public class PlayerCollision : MonoBehaviour
             }
 
             loosePanel.SetActive(true);
-            Time.timeScale = 0f;
+            Time.timeScale = 0f; // Arrête le jeu
+            return; // On sort de la fonction pour ne rien faire d'autre
         }
         else if (other.CompareTag("Shell"))
         {
+            if (Time.time < lastCollectTime + collectDelay) return;
+
+            lastCollectTime = Time.time;
+            int shellID = other.gameObject.GetInstanceID();
+
+            // SÉCURITÉ ABSOLUE : Si on a déjà traité cet ID unique, on ignore
+            if (collectedShells.Contains(shellID)) return;
+
+            // On ajoute l'ID à la liste des objets déjà ramassés
+            collectedShells.Add(shellID);
+
+            // --- Ton code de ramassage ---
+            other.tag = "Untagged";
             Collider2D shellCollider = other.GetComponent<Collider2D>();
-            if (shellCollider != null && shellCollider.enabled)
+            if (shellCollider != null) shellCollider.enabled = false;
+
+            GameObject anim = Instantiate(collectAnimPrefab, other.transform.position, Quaternion.identity);
+            if (anim != null)
             {
-                shellCollider.enabled = false;
-
-                GameObject anim = Instantiate(collectAnimPrefab, other.transform.position, Quaternion.identity);
                 anim.GetComponent<EndlessCollectAnimation>().StartAnimation(scoreIcon);
-
-                score++;
-                scoreText.text = score.ToString();
-                Destroy(other.gameObject);
             }
+
+            score++;
+            if (scoreText != null) scoreText.text = score.ToString();
+
+            Destroy(other.gameObject);
         }
     }
     public void RestartGame()

@@ -25,6 +25,11 @@ public class WhackableObject : MonoBehaviour
 
     void OnEnable()
     {
+        if (WhackManager.Instance != null)
+        {
+            activeTime = WhackManager.Instance.globalActiveTime;
+        }
+
         startPos = transform.position;
         targetPos = startPos + Vector3.up * moveDistance;
         wasHit = false;

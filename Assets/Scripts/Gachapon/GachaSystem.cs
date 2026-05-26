@@ -73,10 +73,16 @@ public class GachaponManager : MonoBehaviour
         int randomIndex = Random.Range(0, ballPrefabs.Length);
         currentBall = Instantiate(ballPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
 
-        // Force la boule devant le panel
-        Canvas ballCanvas = currentBall.AddComponent<Canvas>();
+        // --- FIX CANVAS ---
+        Canvas ballCanvas = currentBall.GetComponent<Canvas>();
+        if (ballCanvas == null) ballCanvas = currentBall.AddComponent<Canvas>();
+
         ballCanvas.overrideSorting = true;
         ballCanvas.sortingOrder = 100;
+
+        // --- FIX PHYSIQUE ---
+        Rigidbody2D rb = currentBall.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.isKinematic = true;
 
         // --- ANIMATION ---
         float elapsed = 0;

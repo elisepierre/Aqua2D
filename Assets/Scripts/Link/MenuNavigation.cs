@@ -18,6 +18,11 @@ public class MenuNavigation : MonoBehaviour
         SceneManager.LoadScene("AquariumScene");
     }
 
+    public void LoadCollectionScene()
+    {
+        SceneManager.LoadScene("CollectionScene");
+    }
+
     public void LoadLinkScene()
     {
         GachaponManager gacha = FindObjectOfType<GachaponManager>();

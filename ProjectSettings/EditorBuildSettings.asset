@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WAMGameScene.unity
     guid: a39eaa57df6451b44a31fe06f5f9c762
+  - enabled: 1
+    path: Assets/Scenes/CollectionScene.unity
+    guid: 2cc3d6823e4948b478641ce4e567f374
   m_configObjects: {}
