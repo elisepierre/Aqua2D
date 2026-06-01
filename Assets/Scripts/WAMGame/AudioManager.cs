@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip sirenSadClip;
     public AudioClip rockHitClip;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -31,7 +31,10 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
+            // SI UN DOUBLON ARRIVE : ON LE DÉTRUIT TOUT DE SUITE
+            Debug.Log("Doublon détecté et supprimé : " + gameObject.name);
             Destroy(gameObject);
+            return; // On arrête l'exécution ici pour ne pas lancer le reste du script
         }
     }
 

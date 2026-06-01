@@ -5559,7 +5559,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 822251432}
+      - m_Target: {fileID: 1227672324}
         m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: SetLanguage
         m_Mode: 3
@@ -5970,7 +5970,7 @@ GameObject:
   - component: {fileID: 780427556}
   - component: {fileID: 780427555}
   m_Layer: 5
-  m_Name: FrenchText
+  m_Name: TXT_French
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6235,7 +6235,6 @@ GameObject:
   m_Component:
   - component: {fileID: 822251434}
   - component: {fileID: 822251433}
-  - component: {fileID: 822251432}
   m_Layer: 0
   m_Name: MainMenuManager
   m_TagString: Untagged
@@ -6243,20 +6242,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &822251432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822251431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8301f6dc19382964c8ba0037a736afa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  englishFontAsset: {fileID: 11400000, guid: 40bc73dbb9260714a9931f5561b72887, type: 2}
-  chineseFontAsset: {fileID: 11400000, guid: 686efaf2a7f9c784eac183aa58500998, type: 2}
 --- !u!114 &822251433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6899,7 +6884,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 822251432}
+      - m_Target: {fileID: 1227672324}
         m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: SetLanguage
         m_Mode: 3
@@ -7443,7 +7428,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 822251432}
+      - m_Target: {fileID: 1227672324}
         m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: SetLanguage
         m_Mode: 3
@@ -7627,6 +7612,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196743078}
   m_CullTransparentMesh: 1
+--- !u!1 &1227672323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227672325}
+  - component: {fileID: 1227672324}
+  m_Layer: 0
+  m_Name: LanguageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1227672324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227672323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8301f6dc19382964c8ba0037a736afa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  englishFontAsset: {fileID: 11400000, guid: 40bc73dbb9260714a9931f5561b72887, type: 2}
+  chineseFontAsset: {fileID: 11400000, guid: 686efaf2a7f9c784eac183aa58500998, type: 2}
+--- !u!4 &1227672325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227672323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.39758825, y: -2.2693114, z: 0.016821023}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239765746
 GameObject:
   m_ObjectHideFlags: 0
@@ -14157,3 +14188,4 @@ SceneRoots:
   - {fileID: 1707638960}
   - {fileID: 12347097}
   - {fileID: 876426503}
+  - {fileID: 1227672325}

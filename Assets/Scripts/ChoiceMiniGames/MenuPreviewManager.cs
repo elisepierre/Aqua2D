@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuPreviewManager : MonoBehaviour
@@ -95,7 +95,30 @@ public class MenuPreviewManager : MonoBehaviour
         if (fisherWhackAnimator != null) fisherWhackAnimator.SetTrigger("StopDemo");
     }
 
-    public void LoadReflexGame() => SceneManager.LoadScene("ReflexGameScene");
-    public void LoadEndlessGame() => SceneManager.LoadScene("EndlessGameScene");
-    public void LoadWAMGame() => SceneManager.LoadScene("WAMGameScene");
+    public void LoadReflexGame()
+    {
+        StopMusicBeforeLoading();
+        SceneManager.LoadScene("ReflexGameScene");
+    }
+
+    public void LoadEndlessGame()
+    {
+        StopMusicBeforeLoading();
+        SceneManager.LoadScene("EndlessGameScene");
+    }
+
+    public void LoadWAMGame()
+    {
+        StopMusicBeforeLoading();
+        SceneManager.LoadScene("WAMGameScene");
+    }
+
+    // Petite fonction utilitaire pour éviter de répéter le code
+    private void StopMusicBeforeLoading()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+        }
+    }
 }

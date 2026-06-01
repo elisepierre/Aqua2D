@@ -13,13 +13,18 @@ public class LanguageManager : MonoBehaviour
 
     private void Awake()
     {
+        // LE VIDEUR : Empêche les doublons et garde les réglages
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        else Destroy(gameObject);
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 
     void Start()
@@ -29,18 +34,50 @@ public class LanguageManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Time.timeScale = 1f;
         RefreshSceneText();
+        ReconnectLanguageButtons(); // <-- AJOUTE CETTE LIGNE
+    }
+
+    private void ReconnectLanguageButtons()
+    {
+        // On récupère TOUS les boutons de la scène, même ceux cachés dans des panels
+        UnityEngine.UI.Button[] allButtons = Resources.FindObjectsOfTypeAll<UnityEngine.UI.Button>();
+
+        foreach (var btn in allButtons)
+        {
+            // On vérifie le nom de l'objet (assure-toi que c'est bien le nom dans la hiérarchie)
+            if (btn.gameObject.name == "EnglishButton")
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => SetLanguage(0));
+                Debug.Log("Lien rétabli pour Anglais");
+            }
+            else if (btn.gameObject.name == "ChineseButton")
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => SetLanguage(1));
+                Debug.Log("Lien rétabli pour Chinois");
+            }
+            else if (btn.gameObject.name == "FrenchButton")
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => SetLanguage(2));
+                Debug.Log("Lien rétabli pour Français");
+            }
+        }
     }
 
     public void SetLanguage(int index)
     {
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.pauseClip);
-        }
-
+        // Sauvegarde immédiate dans la mémoire du téléphone/PC
         PlayerPrefs.SetInt("SelectedLanguage", index);
+        PlayerPrefs.Save();
+
         RefreshSceneText();
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pauseClip);
     }
 
     public void RefreshSceneText()
@@ -58,11 +95,16 @@ public class LanguageManager : MonoBehaviour
         // --- SCENE : MAIN MENU ---
         TranslateByName("TXT_Play", lang == 0 ? "PLAY" : lang == 1 ? "開始遊戲" : "JOUER");
         TranslateByName("TXT_Continue", lang == 0 ? "CONTINUE" : lang == 1 ? "繼續" : "CONTINUER");
-        TranslateByName("TXT_Settings", lang == 0 ? "SETTINGS" : lang == 1 ? "設定" : "OPTIONS");
+        TranslateByName("TXT_Settings", lang == 0 ? "LANGUAGE" : lang == 1 ? "語言" : "LANGUE");
         TranslateByName("TXT_French", lang == 0 ? "FRENCH" : lang == 1 ? "法文" : "FRANÇAIS");
+        TranslateByName("TXT_English", lang == 0 ? "ENGLISH" : lang == 1 ? "英語" : "ANGLAIS");
+        TranslateByName("TXT_Chinese", lang == 0 ? "CHINESE" : lang == 1 ? "繁體中文" : "CHINOIS TRAD.");
 
         // --- SCENE : LINK SCENE ---
         TranslateByName("TXT_ChoiceTitle", lang == 0 ? "CHOOSE A MINI-GAME" : lang == 1 ? "選擇小遊戲" : "CHOISIS UN JEU");
+        TranslateByName("TXT_Game1", lang == 0 ? "CLEAN OCEAN" : lang == 1 ? "清潔海洋" : "LAVER L'OCÉAN");
+        TranslateByName("TXT_Game2", lang == 0 ? "SWIM RUSH" : lang == 1 ? "極速游泳" : "COURSE DE NAGE");
+        TranslateByName("TXT_Game3", lang == 0 ? "FISHER WACK" : lang == 1 ? "敲打漁夫" : "TAPE-PÊCHEURS");
         TranslateByName("TXT_Minigames", lang == 0 ? "MINI-GAMES" : lang == 1 ? "小遊戲" : "MINI-JEUX");
         TranslateByName("TXT_Gachapon", lang == 0 ? "GACHAPON" : lang == 1 ? "扭蛋機" : "GACHAPON");
         TranslateByName("TXT_Aquarium", lang == 0 ? "AQUARIUM" : lang == 1 ? "水族箱" : "AQUARIUM");

@@ -5,7 +5,8 @@ public class MainMenuManager : MonoBehaviour
 {
     void Start()
     {
-        // On lance la musique du menu dès le départ
+        Time.timeScale = 1f; // Sécurité absolue pour réveiller les boutons
+
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayMenuMusic();
