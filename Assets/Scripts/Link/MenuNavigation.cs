@@ -23,6 +23,11 @@ public class MenuNavigation : MonoBehaviour
         SceneManager.LoadScene("CollectionScene");
     }
 
+    public void LoadMainMenuScene()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void LoadLinkScene()
     {
         GachaponManager gacha = FindObjectOfType<GachaponManager>();

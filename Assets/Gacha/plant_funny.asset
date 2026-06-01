@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c69599082757ef41b4a73a4d1aac84a, type: 3}
   m_Name: plant_funny
   m_EditorClassIdentifier: 
-  itemID: plant_funny
-  itemName: Funny Plant
-  itemSprite: {fileID: -1623065430, guid: b6f8f5c18aad30c428e31fe53454a9b4, type: 3}
+  itemID: plant_seaweed
+  itemName: 'Seaweed '
+  itemSprite: {fileID: -998682377, guid: b6f8f5c18aad30c428e31fe53454a9b4, type: 3}
   isFish: 0

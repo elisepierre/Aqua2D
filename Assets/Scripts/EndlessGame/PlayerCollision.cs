@@ -21,16 +21,24 @@ public class PlayerCollision : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
-        if (scoreText != null)
+        // 1. LANCER LA MUSIQUE DU MODE ENDLESS
+        if (AudioManager.Instance != null)
         {
-            scoreText.text = "0";
+            AudioManager.Instance.PlayEndlessMusic();
         }
+
+        if (scoreText != null) scoreText.text = "0";
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Obstacle"))
         {
-            Debug.Log("COLLISION OBSTACLE !");
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.rockHitClip);
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.gameOverClip);
+                AudioManager.Instance.StopMusic();
+            }
 
             if (DataManager.Instance != null)
             {
@@ -53,6 +61,11 @@ public class PlayerCollision : MonoBehaviour
 
             // On ajoute l'ID à la liste des objets déjà ramassés
             collectedShells.Add(shellID);
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.shellClip);
+            }
 
             // --- Ton code de ramassage ---
             other.tag = "Untagged";
@@ -79,6 +92,11 @@ public class PlayerCollision : MonoBehaviour
 
     public void GoToMenu()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.homeClip);
+            AudioManager.Instance.StopMusic();
+        }
         Time.timeScale = 1f;
         SceneManager.LoadScene("LinkScene");
     }

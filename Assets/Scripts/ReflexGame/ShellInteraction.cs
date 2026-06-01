@@ -9,6 +9,11 @@ public class ShellInteraction : MonoBehaviour
         if (wasCollected || Time.timeScale == 0) return;
         wasCollected = true;
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.shellClip);
+        }
+
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {

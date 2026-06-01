@@ -1,8 +1,17 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    void Start()
+    {
+        // On lance la musique du menu dès le départ
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMenuMusic();
+        }
+    }
+
     public void LoadStory()
     {
         SceneManager.LoadScene("StoryScene");
@@ -11,5 +20,13 @@ public class MainMenuManager : MonoBehaviour
     public void LoadChoice()
     {
         SceneManager.LoadScene("LinkScene");
+    }
+
+    public void PlayClickSound()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pauseClip);
+        }
     }
 }

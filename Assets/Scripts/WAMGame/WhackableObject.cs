@@ -85,10 +85,12 @@ public class WhackableObject : MonoBehaviour
 
         if (isBadGuy)
         {
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(AudioManager.Instance.whackClip);
             StartCoroutine(HitAndDisappear());
         }
         else
         {
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(AudioManager.Instance.shellClip);
             WhackManager.Instance.AddScore(1);
 
             if (collectAnimationPrefab != null)

@@ -13,6 +13,11 @@ public class StopManager : MonoBehaviour
     {
         if (loosePanel != null && loosePanel.activeSelf) return;
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pauseClip);
+        }
+
         Time.timeScale = 0f;
         stopButton.SetActive(false);
         pausePanel.SetActive(true);

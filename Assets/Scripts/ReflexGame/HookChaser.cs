@@ -51,6 +51,11 @@ public class HookChaser : MonoBehaviour
             yield return null;
         }
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.trashClip);
+        }
+
         // Attraper
         targetTrash.transform.SetParent(hookHead);
         targetTrash.transform.localPosition = Vector3.zero;

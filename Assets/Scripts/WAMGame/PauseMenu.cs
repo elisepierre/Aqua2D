@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(AudioManager.Instance.pauseClip);
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
         pausePanel.SetActive(true);
@@ -23,6 +24,10 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMenu()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+        }
         Time.timeScale = 1f;
         SceneManager.LoadScene("LinkScene");
     }

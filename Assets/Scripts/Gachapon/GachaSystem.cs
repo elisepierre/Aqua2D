@@ -100,7 +100,12 @@ public class GachaponManager : MonoBehaviour
         // --- AFFICHAGE DU RÉSULTAT (Ligne 74 - Zone du crash) ---
         Debug.Log("Fin de l'animation, tentative d'affichage du panel...");
 
-        if (resultNameText != null) resultNameText.text = wonItem.itemName;
+        // --- AFFICHAGE DU RÉSULTAT CORRIGÉ ---
+        if (resultNameText != null)
+        {
+            // On appelle la fonction de traduction avec l'ID de l'objet gagné
+            resultNameText.text = GetTranslatedItemName(wonItem.itemID);
+        }
         else Debug.LogError("La case 'Result Name Text' est VIDE dans l'inspecteur !");
 
         if (resultImage != null) resultImage.sprite = wonItem.itemSprite;
@@ -114,6 +119,24 @@ public class GachaponManager : MonoBehaviour
             PlayerPrefs.Save();
         }
         else Debug.LogError("La case 'Prize Panel' est VIDE dans l'inspecteur !");
+    }
+
+    public string GetTranslatedItemName(string itemID)
+    {
+        int lang = PlayerPrefs.GetInt("SelectedLanguage", 0);
+        switch (itemID)
+        {
+            case "fish_blue": return lang == 0 ? "Blue Tang" : lang == 1 ? "擬刺尾鯛" : "Chirurgien Bleu";
+            case "fish_clown": return lang == 0 ? "Clownfish" : lang == 1 ? "小丑魚" : "Poisson-Clown";
+            case "fish_diodon": return lang == 0 ? "Diodon" : lang == 1 ? "刺河豚" : "Poisson-Globe";
+            case "fish_mask": return lang == 0 ? "Masked Bannerfish" : lang == 1 ? "馬夫魚" : "Poisson-Cocher";
+            case "fish_yellow": return lang == 0 ? "Yellow Tang" : lang == 1 ? "黃高鰭刺尾魚" : "Chirurgien Jaune";
+            case "plant_anemone": return lang == 0 ? "Sea Anemone" : lang == 1 ? "海葵" : "Anémone";
+            case "plant_coral": return lang == 0 ? "Coral" : lang == 1 ? "珊瑚" : "Corail";
+            case "plant_seaweed": return lang == 0 ? "Seaweed" : lang == 1 ? "海藻" : "Algue";
+            case "plant_rock": return lang == 0 ? "Rock" : lang == 1 ? "岩石" : "Rocher";
+            default: return itemID; // Retourne l'ID brut si pas de traduction trouvée
+        }
     }
 
     void UnlockItem(CollectableItem item)
