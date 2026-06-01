@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c69599082757ef41b4a73a4d1aac84a, type: 3}
   m_Name: fish_diodon
   m_EditorClassIdentifier: 
-  itemID: 'fish_diodon '
+  itemID: fish_diodon
   itemName: 'Diodon '
   itemSprite: {fileID: 1077849256, guid: b50ea8b86e7e34c4a84f362500a80637, type: 3}
   isFish: 1

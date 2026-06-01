@@ -40,12 +40,14 @@ public class PlayerCollision : MonoBehaviour
                 AudioManager.Instance.StopMusic();
             }
 
-            if (DataManager.Instance != null)
-            {
-                DataManager.Instance.AddShellsToTotal(score);
-            }
+            // AU LIEU DE FAIRE ÇA (qui n'affiche que le panel vide) :
+            // loosePanel.SetActive(true); 
 
-            loosePanel.SetActive(true);
+            // FAIS ÇA (qui lance toute la logique du GameManager) :
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.TriggerGameOver();
+            }
             Time.timeScale = 0f; // Arrête le jeu
             return; // On sort de la fonction pour ne rien faire d'autre
         }
@@ -78,8 +80,15 @@ public class PlayerCollision : MonoBehaviour
                 anim.GetComponent<EndlessCollectAnimation>().StartAnimation(scoreIcon);
             }
 
+            // On augmente le score dans le script Collision
             score++;
             if (scoreText != null) scoreText.text = score.ToString();
+
+            // ET ON PRÉVIENT LE GAMEMANAGER (C'est cette ligne qui manque !)
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.AddScore(1);
+            }
 
             Destroy(other.gameObject);
         }

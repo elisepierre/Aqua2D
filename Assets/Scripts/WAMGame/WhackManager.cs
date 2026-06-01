@@ -35,6 +35,16 @@ public class WhackManager : MonoBehaviour
     private bool[] holeOccupied; // Ce tableau causait l'erreur
     private float elapsedTime = 0f;
 
+    [Header("GameOver UI")]
+    public TextMeshProUGUI gameOverTitleText; // TXT_GameOverTitle
+    public TextMeshProUGUI endTimerText; // TXT_FinalTimer -> ex: "30s"
+    public TextMeshProUGUI endShellsText; // TXT_FinalShells -> ex: "15"
+    public TextMeshProUGUI bestTimerText; // TXT_BestTimer -> ex: "Best: 124s"
+
+    [Header("HUD Elements to Hide")]
+    public GameObject[] hudElementsToHide;
+
+
     void Awake()
     {
         // On simplifie le Singleton : pas besoin de DontDestroyOnLoad ici 
@@ -176,14 +186,49 @@ public class WhackManager : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
+        // 1. Audio
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlaySFX(AudioManager.Instance.gameOverClip);
         }
 
+        // 2. Sauvegarde (Global et Best)
         if (DataManager.Instance != null) DataManager.Instance.AddShellsToTotal(score);
 
+        int currentTime = Mathf.FloorToInt(elapsedTime);
+        int bestTime = PlayerPrefs.GetInt("BestTime_Whack", 0);
+
+        if (currentTime > bestTime)
+        {
+            PlayerPrefs.SetInt("BestTime_Whack", currentTime);
+            bestTime = currentTime;
+        }
+
+        // 3. Masquer les éléments du HUD (Pause, Score temps réel, etc.)
+        foreach (GameObject obj in hudElementsToHide)
+        {
+            if (obj != null) obj.SetActive(false);
+        }
+
+        // 4. Affichage des textes traduits
+        int lang = PlayerPrefs.GetInt("SelectedLanguage", 0);
+
+        // Titre : "Fin de partie"
+        gameOverTitleText.text = (lang == 1) ? "遊戲結束" : (lang == 2 ? "FIN DE PARTIE" : "GAME OVER");
+
+        // Score final : "Score: 30s"
+        string scoreLabel = (lang == 1) ? "分數" : (lang == 2 ? "Score" : "Score");
+        endTimerText.text = $"{scoreLabel}: {currentTime}s";
+
+        // Coquillages récoltés
+        endShellsText.text = score.ToString();
+
+        // Meilleur temps : "Best: 124s"
+        string bestLabel = (lang == 1) ? "最高紀錄" : "Best";
+        bestTimerText.text = $"{bestLabel}: {bestTime}s";
+
+        // 5. Activation du Panel
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
     }
