@@ -35,10 +35,20 @@ public class GachaponManager : MonoBehaviour
     {
         if (isUiActive) return;
 
+        // 1. On vérifie si on a assez de coquillages
         if (DataManager.Instance != null && DataManager.Instance.SpendShells(5))
         {
             isUiActive = true;
             spinText.SetActive(false);
+
+            // 2. ON JOUE LE SON DE LA MANIVELLE ICI (À TOUS LES COUPS)
+            if (AudioManager.Instance != null)
+            {
+                // On peut appeler une fonction spécifique ou PlaySFX directement
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.shellClip);
+                // Note: Remplace shellClip par crankClip si tu as créé la variable
+            }
+
             StartCoroutine(AnimateBall());
         }
     }
@@ -101,43 +111,57 @@ public class GachaponManager : MonoBehaviour
         }
 
         // --- AFFICHAGE DU RÉSULTAT (Ligne 74 - Zone du crash) ---
+        // ... (après l'animation de la boule) ...
+
         Debug.Log("Fin de l'animation, tentative d'affichage du panel...");
 
-        bool isNew = PlayerPrefs.GetInt("Unlocked_" + wonItem.itemID, 0) == 0;
+        // 1. ON VÉRIFIE D'ABORD SI L'ITEM EST NOUVEAU
+        int dejaDebloque = PlayerPrefs.GetInt("Unlocked_" + wonItem.itemID, 0);
+        bool isNew = (dejaDebloque == 0);
 
-        // --- AFFICHAGE DU RÉSULTAT CORRIGÉ ---
+        Debug.Log("Item ID: " + wonItem.itemID + " | Est nouveau ? " + isNew);
+
+        // 2. ON PRÉPARE L'UI (Texte traduit et Image)
         if (resultNameText != null)
         {
-            // On appelle la fonction de traduction avec l'ID de l'objet gagné
             resultNameText.text = GetTranslatedItemName(wonItem.itemID);
         }
-        else Debug.LogError("La case 'Result Name Text' est VIDE dans l'inspecteur !");
 
-        if (resultImage != null) resultImage.sprite = wonItem.itemSprite;
-        else Debug.LogError("La case 'Result Image' est VIDE dans l'inspecteur !");
+        if (resultImage != null)
+        {
+            resultImage.sprite = wonItem.itemSprite;
+        }
 
+        // 3. ON AFFICHE LE PANEL ET ON GÈRE LE "NEW" + SON
         if (prizePanel != null)
         {
             prizePanel.SetActive(true);
 
-            // Si c'est un nouvel item : on affiche le texte et on joue le son "Win" (GameOver)
             if (isNew)
             {
                 if (newTextObject != null) newTextObject.SetActive(true);
 
                 if (AudioManager.Instance != null)
                 {
-                    // On utilise le son de GameOver pour l'effet "Coup de trompette/Victoire"
+                    // Si tu n'entends rien, vérifie que 'gameOverClip' est bien rempli dans l'inspecteur de l'AudioManager
                     AudioManager.Instance.PlaySFX(AudioManager.Instance.gameOverClip);
                 }
             }
+            else
+            {
+                if (newTextObject != null) newTextObject.SetActive(false);
+            }
 
-            // On sauvegarde après avoir vérifié si c'était nouveau
+            // 4. SEULEMENT MAINTENANT ON SAUVEGARDE
             PlayerPrefs.SetInt("Unlocked_" + wonItem.itemID, 1);
             PlayerPrefs.Save();
         }
-        else Debug.LogError("La case 'Prize Panel' est VIDE dans l'inspecteur !");
+        else
+        {
+            Debug.LogError("La case 'Prize Panel' est VIDE !");
+        }
     }
+
 
     public string GetTranslatedItemName(string itemID)
     {

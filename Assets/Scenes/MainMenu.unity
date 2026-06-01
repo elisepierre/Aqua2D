@@ -6507,6 +6507,7 @@ MonoBehaviour:
   sirenSadClip: {fileID: 8300000, guid: 8136d54d092babf4db45a52d1728ad1e, type: 3}
   rockHitClip: {fileID: 8300000, guid: 92be7acb009db42448017246d12096f8, type: 3}
   aquariumMusic: {fileID: 8300000, guid: 4c733fbd4d8199b43b734dfd9c25f22c, type: 3}
+  crankClip: {fileID: 8300000, guid: 34485eeaa2e3f8d4fbf3c961273deed1, type: 3}
 --- !u!4 &876426503
 Transform:
   m_ObjectHideFlags: 0

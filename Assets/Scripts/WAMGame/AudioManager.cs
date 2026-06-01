@@ -25,7 +25,8 @@ public class AudioManager : MonoBehaviour
     [Header("Musiques de Fond")]
     public AudioClip aquariumMusic; // Glisse ici une musique zen/calme
 
-    
+    [Header("Effets Sonores (SFX)")]
+    public AudioClip crankClip;
 
     private void Awake()
     {
@@ -115,5 +116,10 @@ public class AudioManager : MonoBehaviour
 
         sfxSource.PlayOneShot(clip);
         Debug.Log("Son joué : " + clip.name);
+    }
+
+    public void PlayCrankSound()
+    {
+        PlaySFX(crankClip);
     }
 }
