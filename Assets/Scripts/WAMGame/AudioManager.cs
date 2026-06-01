@@ -22,6 +22,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip sirenSadClip;
     public AudioClip rockHitClip;
 
+    [Header("Musiques de Fond")]
+    public AudioClip aquariumMusic; // Glisse ici une musique zen/calme
+
+    
+
     private void Awake()
     {
         if (Instance == null)
@@ -62,15 +67,20 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // Ajoute cette fonction pour la lancer
+    public void PlayAquariumMusic()
+    {
+        PlayMusic(aquariumMusic);
+    }
+
     // Lance la musique du jeu Whack-a-Fish
     public void PlayWhackMusic()
     {
-        if (musicSource != null && backgroundMusic != null)
-        {
-            musicSource.clip = backgroundMusic;
-            musicSource.loop = true;
-            musicSource.Play();
-        }
+        musicSource.Stop(); // Arrête tout net
+        musicSource.clip = backgroundMusic;
+        musicSource.loop = true;
+        musicSource.Play();
+        Debug.Log("Musique Whack lancée sur : " + musicSource.gameObject.name);
     }
 
     // Lance la musique du jeu Deep Sea Catch
@@ -86,21 +96,24 @@ public class AudioManager : MonoBehaviour
 
     private void PlayMusic(AudioClip clip)
     {
-        if (musicSource != null && clip != null)
-        {
-            if (musicSource.clip == clip && musicSource.isPlaying) return; // Déjà en cours
+        if (musicSource == null || clip == null) return;
 
-            musicSource.clip = clip;
-            musicSource.loop = true;
-            musicSource.Play();
-        }
+        // Si c'est déjà le même clip qui joue, on ne touche à rien
+        if (musicSource.clip == clip && musicSource.isPlaying) return;
+
+        musicSource.Stop(); // ON FORCE L'ARRÊT
+        musicSource.clip = clip;
+        musicSource.loop = true;
+        musicSource.Play();
+        Debug.Log("AudioManager : Nouvelle musique lancée -> " + clip.name);
     }
 
     public void PlaySFX(AudioClip clip)
     {
-        if (sfxSource != null && clip != null)
-        {
-            sfxSource.PlayOneShot(clip);
-        }
+        if (sfxSource == null) { Debug.LogError("SFX Source manquante !"); return; }
+        if (clip == null) { Debug.LogError("AudioClip manquant dans l'appel !"); return; }
+
+        sfxSource.PlayOneShot(clip);
+        Debug.Log("Son joué : " + clip.name);
     }
 }

@@ -21,11 +21,6 @@ public class PlayerCollision : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
-        // 1. LANCER LA MUSIQUE DU MODE ENDLESS
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayEndlessMusic();
-        }
 
         if (scoreText != null) scoreText.text = "0";
     }

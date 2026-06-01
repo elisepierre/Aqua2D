@@ -15,13 +15,11 @@ public class MenuNavigation : MonoBehaviour
 
     public void LoadAquariumScene()
     {
-        if (AudioManager.Instance != null) AudioManager.Instance.StopMusic();
         SceneManager.LoadScene("AquariumScene");
     }
 
     public void LoadCollectionScene()
     {
-        if (AudioManager.Instance != null) AudioManager.Instance.StopMusic();
         SceneManager.LoadScene("CollectionScene");
     }
 

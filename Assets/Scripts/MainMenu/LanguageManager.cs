@@ -36,35 +36,77 @@ public class LanguageManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         RefreshSceneText();
-        ReconnectLanguageButtons(); // <-- AJOUTE CETTE LIGNE
+        ReconnectLanguageButtons();
+
+        if (AudioManager.Instance != null)
+        {
+            string name = scene.name;
+            Debug.Log("Scène chargée : " + name); // Pour vérifier le nom exact dans la console
+
+            // GROUPE 1 : Musique du Menu (Main, Link, Choice, Gacha)
+            if (name == "MainMenu" || name == "LinkScene" || name == "ChoiceScene" || name == "GachaponScene")
+            {
+                // On ne relance que si ce n'est pas déjà le MenuMusic qui joue
+                if (AudioManager.Instance.musicSource.clip != AudioManager.Instance.menuMusic || !AudioManager.Instance.musicSource.isPlaying)
+                {
+                    AudioManager.Instance.PlayMenuMusic();
+                }
+            }
+            // GROUPE 2 : Musique Zen (Aquarium, Collection)
+            else if (name == "AquariumScene" || name == "CollectionScene")
+            {
+                AudioManager.Instance.PlayAquariumMusic();
+            }
+            // GROUPE 3 : Musique de Jeu (Endless)
+            else if (name == "EndlessGameScene")
+            {
+                AudioManager.Instance.PlayEndlessMusic();
+            }
+            // GROUPE 4 : Musique de Jeu (Reflex/Catch)
+            else if (name == "ReflexGameScene")
+            {
+                AudioManager.Instance.PlayCatchMusic();
+            }
+        }
     }
 
     private void ReconnectLanguageButtons()
     {
-        // On récupère TOUS les boutons de la scène, même ceux cachés dans des panels
+        // On récupère TOUS les boutons de la scène
         UnityEngine.UI.Button[] allButtons = Resources.FindObjectsOfTypeAll<UnityEngine.UI.Button>();
 
         foreach (var btn in allButtons)
         {
-            // On vérifie le nom de l'objet (assure-toi que c'est bien le nom dans la hiérarchie)
+            // --- 1. GESTION DES BOUTONS DE LANGUE (Ton code d'origine) ---
             if (btn.gameObject.name == "EnglishButton")
             {
                 btn.onClick.RemoveAllListeners();
                 btn.onClick.AddListener(() => SetLanguage(0));
-                Debug.Log("Lien rétabli pour Anglais");
             }
             else if (btn.gameObject.name == "ChineseButton")
             {
                 btn.onClick.RemoveAllListeners();
                 btn.onClick.AddListener(() => SetLanguage(1));
-                Debug.Log("Lien rétabli pour Chinois");
             }
             else if (btn.gameObject.name == "FrenchButton")
             {
                 btn.onClick.RemoveAllListeners();
                 btn.onClick.AddListener(() => SetLanguage(2));
-                Debug.Log("Lien rétabli pour Français");
             }
+
+            // --- 2. GESTION DU SON AUTOMATIQUE (Le nouvel ajout) ---
+            // On ajoute le son à TOUS les boutons sans supprimer les actions précédentes
+            btn.onClick.RemoveListener(PlayButtonSound);
+            btn.onClick.AddListener(PlayButtonSound);
+        }
+    }
+
+    // N'oublie pas de garder cette petite fonction juste en dessous
+    private void PlayButtonSound()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.pauseClip);
         }
     }
 
@@ -244,4 +286,5 @@ public class LanguageManager : MonoBehaviour
             }
         }
     }
+
 }

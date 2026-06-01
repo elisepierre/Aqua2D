@@ -23,6 +23,9 @@ public class GachaponManager : MonoBehaviour
     private GameObject currentBall;
     [HideInInspector] public bool isUiActive = false;
 
+    [Header("New Prize UI")]
+    public GameObject newTextObject;
+
     void Start()
     {
         if (DataManager.Instance != null) DataManager.Instance.RefreshData();
@@ -100,6 +103,8 @@ public class GachaponManager : MonoBehaviour
         // --- AFFICHAGE DU RÉSULTAT (Ligne 74 - Zone du crash) ---
         Debug.Log("Fin de l'animation, tentative d'affichage du panel...");
 
+        bool isNew = PlayerPrefs.GetInt("Unlocked_" + wonItem.itemID, 0) == 0;
+
         // --- AFFICHAGE DU RÉSULTAT CORRIGÉ ---
         if (resultNameText != null)
         {
@@ -114,7 +119,20 @@ public class GachaponManager : MonoBehaviour
         if (prizePanel != null)
         {
             prizePanel.SetActive(true);
-            // On sauvegarde ici
+
+            // Si c'est un nouvel item : on affiche le texte et on joue le son "Win" (GameOver)
+            if (isNew)
+            {
+                if (newTextObject != null) newTextObject.SetActive(true);
+
+                if (AudioManager.Instance != null)
+                {
+                    // On utilise le son de GameOver pour l'effet "Coup de trompette/Victoire"
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.gameOverClip);
+                }
+            }
+
+            // On sauvegarde après avoir vérifié si c'était nouveau
             PlayerPrefs.SetInt("Unlocked_" + wonItem.itemID, 1);
             PlayerPrefs.Save();
         }
@@ -150,6 +168,7 @@ public class GachaponManager : MonoBehaviour
     public void ClosePrizePanel()
     {
         if (currentBall != null) Destroy(currentBall);
+        if (newTextObject != null) newTextObject.SetActive(false);
         prizePanel.SetActive(false);
         spinText.SetActive(true);
         isUiActive = false;

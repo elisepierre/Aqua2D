@@ -6494,18 +6494,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 876426501}
   menuMusic: {fileID: 8300000, guid: f00334cd6f1ae8b409ab0658b4717a24, type: 3}
-  backgroundMusic: {fileID: 0}
-  catchBackgroundMusic: {fileID: 0}
-  endlessBackgroundMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 49f2ded1d4791084db0dc8e981b48230, type: 3}
+  catchBackgroundMusic: {fileID: 8300000, guid: f326a602bb685624685ff06506ed3579, type: 3}
+  endlessBackgroundMusic: {fileID: 8300000, guid: 332b9cd503429574698f8eb26404ded3, type: 3}
   sfxSource: {fileID: 876426501}
-  whackClip: {fileID: 0}
-  shellClip: {fileID: 0}
-  trashClip: {fileID: 0}
-  gameOverClip: {fileID: 0}
+  whackClip: {fileID: 8300000, guid: dd61bd9f9d866914fa89842f4d0d7383, type: 3}
+  shellClip: {fileID: 8300000, guid: c1a05fea1c64dd2438b10d36609fb895, type: 3}
+  trashClip: {fileID: 8300000, guid: a0ddab276a2b133459ac40fc7f50e770, type: 3}
+  gameOverClip: {fileID: 8300000, guid: a87998dbefeb5df46bd5d53ff2d9763e, type: 3}
   pauseClip: {fileID: 8300000, guid: 786f2de700936364c9794211322191de, type: 3}
   homeClip: {fileID: 8300000, guid: 786f2de700936364c9794211322191de, type: 3}
-  sirenSadClip: {fileID: 0}
-  rockHitClip: {fileID: 0}
+  sirenSadClip: {fileID: 8300000, guid: 8136d54d092babf4db45a52d1728ad1e, type: 3}
+  rockHitClip: {fileID: 8300000, guid: 92be7acb009db42448017246d12096f8, type: 3}
+  aquariumMusic: {fileID: 8300000, guid: 4c733fbd4d8199b43b734dfd9c25f22c, type: 3}
 --- !u!4 &876426503
 Transform:
   m_ObjectHideFlags: 0

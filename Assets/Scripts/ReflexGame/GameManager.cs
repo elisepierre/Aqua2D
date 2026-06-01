@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     public RectTransform globalScoreIcon;
     public GameObject collectAnimPrefab;
 
+    public enum GameType { Reflex, Endless }
+    [Header("Configuration du son")]
+    public GameType modeDeJeu;
+
     private float timer = 0f;
     private int score = 0;
     private bool isPaused = false;
@@ -37,18 +41,33 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // C'EST CETTE LIGNE QUI DÉBLOQUE TOUT
         Time.timeScale = 1f;
-
-        isGameOver = false; // On remet les flags à zéro
+        isGameOver = false;
         isPaused = false;
         timer = 0f;
         score = 0;
 
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayCatchMusic();
+            // On ne regarde plus le nom de la scène, on regarde la case choisie dans l'Inspecteur
+            if (modeDeJeu == GameType.Endless)
+            {
+                Debug.Log("Lancement Musique : ENDLESS");
+                AudioManager.Instance.PlayEndlessMusic();
+            }
+            else
+            {
+                Debug.Log("Lancement Musique : REFLEX");
+                AudioManager.Instance.PlayCatchMusic();
+            }
         }
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        // On ne lance pas la musique ici, le Start() de la nouvelle scène s'en chargera !
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void Update()
@@ -168,15 +187,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("LinkScene");
     }
 
-    public void RestartGame()
-    {
-        // 5. RELANCER LA MUSIQUE AU RESTART
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayCatchMusic();
-        }
-
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }
