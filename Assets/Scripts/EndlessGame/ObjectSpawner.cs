@@ -8,8 +8,8 @@ public class ObjectSpawner : MonoBehaviour
 
     [Header("Réglages de Difficulté")]
     public float spawnRate = 2f;        // Temps entre 2 spawns (au début)
-    public float minSpawnRate = 0.5f;   // Limite de vitesse (pour que ce soit jouable)
-    public float difficultyStep = 0.2f; // De combien on réduit le temps
+    public float minSpawnRate = 1f;   // Limite de vitesse (pour que ce soit jouable)
+    public float difficultyStep = 0.05f; // De combien on réduit le temps
 
     private float spawnTimer = 0f;
     private float difficultyTimer = 0f;

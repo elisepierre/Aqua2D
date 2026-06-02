@@ -655,6 +655,7 @@ MonoBehaviour:
   - {fileID: 136333224}
   globalScoreIcon: {fileID: 136333225}
   collectAnimPrefab: {fileID: 7016054304766849348, guid: 598569517bba3e2428d19a9b1a29f352, type: 3}
+  modeDeJeu: 0
 --- !u!4 &402304293
 Transform:
   m_ObjectHideFlags: 0
@@ -1555,8 +1556,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2131,8 +2132,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2447,7 +2448,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -47.799988, y: -508.85254}
+  m_AnchoredPosition: {x: -29, y: -535.1}
   m_SizeDelta: {x: 150.1699, y: 147.4462}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1538091746
@@ -2572,8 +2573,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
