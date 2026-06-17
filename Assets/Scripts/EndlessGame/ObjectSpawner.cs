@@ -7,16 +7,15 @@ public class ObjectSpawner : MonoBehaviour
     public float[] lanes = new float[] { -2f, 0f, 2f };
 
     [Header("Réglages de Difficulté")]
-    public float spawnRate = 2f;        // Temps entre 2 spawns (au début)
-    public float minSpawnRate = 1f;   // Limite de vitesse (pour que ce soit jouable)
-    public float difficultyStep = 0.05f; // De combien on réduit le temps
+    public float spawnRate = 2f;
+    public float minSpawnRate = 1f;
+    public float difficultyStep = 0.05f;
 
     private float spawnTimer = 0f;
     private float difficultyTimer = 0f;
 
     void Update()
     {
-        // 1. Gérer l'apparition des objets
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= spawnRate)
         {
@@ -24,7 +23,6 @@ public class ObjectSpawner : MonoBehaviour
             spawnTimer = 0f;
         }
 
-        // 2. Gérer l'augmentation de la difficulté toutes les 20s
         difficultyTimer += Time.deltaTime;
         if (difficultyTimer >= 20f)
         {
@@ -35,11 +33,10 @@ public class ObjectSpawner : MonoBehaviour
 
     void IncreaseDifficulty()
     {
-        // On réduit le temps d'attente entre les spawns
         if (spawnRate > minSpawnRate)
         {
             spawnRate -= difficultyStep;
-            // On s'assure de ne pas descendre en dessous du minimum
+
             if (spawnRate < minSpawnRate) spawnRate = minSpawnRate;
 
             Debug.Log("La difficulté augmente ! Nouveau spawnRate : " + spawnRate);
