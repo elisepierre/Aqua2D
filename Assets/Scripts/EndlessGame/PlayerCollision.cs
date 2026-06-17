@@ -35,16 +35,12 @@ public class PlayerCollision : MonoBehaviour
                 AudioManager.Instance.StopMusic();
             }
 
-            // AU LIEU DE FAIRE ÇA (qui n'affiche que le panel vide) :
-            // loosePanel.SetActive(true); 
-
-            // FAIS ÇA (qui lance toute la logique du GameManager) :
             if (GameManager.instance != null)
             {
                 GameManager.instance.TriggerGameOver();
             }
-            Time.timeScale = 0f; // Arrête le jeu
-            return; // On sort de la fonction pour ne rien faire d'autre
+            Time.timeScale = 0f;
+            return;
         }
         else if (other.CompareTag("Shell"))
         {
@@ -53,10 +49,8 @@ public class PlayerCollision : MonoBehaviour
             lastCollectTime = Time.time;
             int shellID = other.gameObject.GetInstanceID();
 
-            // SÉCURITÉ ABSOLUE : Si on a déjà traité cet ID unique, on ignore
             if (collectedShells.Contains(shellID)) return;
 
-            // On ajoute l'ID à la liste des objets déjà ramassés
             collectedShells.Add(shellID);
 
             if (AudioManager.Instance != null)
@@ -64,7 +58,6 @@ public class PlayerCollision : MonoBehaviour
                 AudioManager.Instance.PlaySFX(AudioManager.Instance.shellClip);
             }
 
-            // --- Ton code de ramassage ---
             other.tag = "Untagged";
             Collider2D shellCollider = other.GetComponent<Collider2D>();
             if (shellCollider != null) shellCollider.enabled = false;
@@ -75,11 +68,9 @@ public class PlayerCollision : MonoBehaviour
                 anim.GetComponent<EndlessCollectAnimation>().StartAnimation(scoreIcon);
             }
 
-            // On augmente le score dans le script Collision
             score++;
             if (scoreText != null) scoreText.text = score.ToString();
 
-            // ET ON PRÉVIENT LE GAMEMANAGER (C'est cette ligne qui manque !)
             if (GameManager.instance != null)
             {
                 GameManager.instance.AddScore(1);
