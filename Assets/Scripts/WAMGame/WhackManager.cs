@@ -32,14 +32,14 @@ public class WhackManager : MonoBehaviour
     private float difficultyTimer = 0f;
     private float spawnTimer = 0f;
     private int score = 0;
-    private bool[] holeOccupied; // Ce tableau causait l'erreur
+    private bool[] holeOccupied;
     private float elapsedTime = 0f;
 
     [Header("GameOver UI")]
-    public TextMeshProUGUI gameOverTitleText; // TXT_GameOverTitle
-    public TextMeshProUGUI endTimerText; // TXT_FinalTimer -> ex: "30s"
-    public TextMeshProUGUI endShellsText; // TXT_FinalShells -> ex: "15"
-    public TextMeshProUGUI bestTimerText; // TXT_BestTimer -> ex: "Best: 124s"
+    public TextMeshProUGUI gameOverTitleText;
+    public TextMeshProUGUI endTimerText;
+    public TextMeshProUGUI endShellsText;
+    public TextMeshProUGUI bestTimerText;
 
     [Header("HUD Elements to Hide")]
     public GameObject[] hudElementsToHide;
@@ -47,14 +47,11 @@ public class WhackManager : MonoBehaviour
 
     void Awake()
     {
-        // On simplifie le Singleton : pas besoin de DontDestroyOnLoad ici 
-        // car le Manager appartient à la scène du mini-jeu.
         Instance = this;
     }
 
     void Start()
     {
-        // INITIALISATION DU TABLEAU (Indispensable pour éviter le NullReference)
         if (holePositions != null)
         {
             holeOccupied = new bool[holePositions.Length];
@@ -78,7 +75,6 @@ public class WhackManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
         UpdateTimerDisplay();
 
-        // 1. Gestion du Spawn
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= spawnRate)
         {
@@ -86,7 +82,6 @@ public class WhackManager : MonoBehaviour
             spawnTimer = 0f;
         }
 
-        // 2. Gestion de la Difficulté
         difficultyTimer += Time.deltaTime;
         if (difficultyTimer >= 20f)
         {
@@ -118,7 +113,6 @@ public class WhackManager : MonoBehaviour
 
     void SpawnLogic()
     {
-        // Vérification de sécurité pour éviter le crash
         if (holePositions == null || holeOccupied == null || holePositions.Length == 0) return;
 
         List<int> availableHoles = new List<int>();
@@ -137,20 +131,16 @@ public class WhackManager : MonoBehaviour
 
         GameObject spawned = Instantiate(prefab, holePositions[holeIndex].position, Quaternion.identity);
 
-        // Attribution des index aux scripts
         WhackableObject whackable = spawned.GetComponent<WhackableObject>();
         if (whackable != null) whackable.currentHoleIndex = holeIndex;
 
         SirenObject siren = spawned.GetComponent<SirenObject>();
         if (siren != null) siren.currentHoleIndex = holeIndex;
 
-        // Gestion du tri (Layering)
-        // --- GESTION DU TRI DES SPRITES (LAYER 5 DEVANT / LAYER 2 DERRIÈRE) ---
         SpriteRenderer sr = spawned.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
-            // Si l'index est 0, 1 ou 2 (première rangée), on met le layer 5
-            // Si l'index est 3, 4 ou 5 (deuxième rangée), on met le layer 2
+
             if (holeIndex < 3)
             {
                 sr.sortingOrder = 2;
@@ -186,14 +176,12 @@ public class WhackManager : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
-        // 1. Audio
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlaySFX(AudioManager.Instance.gameOverClip);
         }
 
-        // 2. Sauvegarde (Global et Best)
         if (DataManager.Instance != null) DataManager.Instance.AddShellsToTotal(score);
 
         int currentTime = Mathf.FloorToInt(elapsedTime);
@@ -205,30 +193,23 @@ public class WhackManager : MonoBehaviour
             bestTime = currentTime;
         }
 
-        // 3. Masquer les éléments du HUD (Pause, Score temps réel, etc.)
         foreach (GameObject obj in hudElementsToHide)
         {
             if (obj != null) obj.SetActive(false);
         }
 
-        // 4. Affichage des textes traduits
         int lang = PlayerPrefs.GetInt("SelectedLanguage", 0);
 
-        // Titre : "Fin de partie"
         gameOverTitleText.text = (lang == 1) ? "遊戲結束" : (lang == 2 ? "FIN DE PARTIE" : "GAME OVER");
 
-        // Score final : "Score: 30s"
         string scoreLabel = (lang == 1) ? "分數" : (lang == 2 ? "Score" : "Score");
         endTimerText.text = $"{scoreLabel}: {currentTime}s";
 
-        // Coquillages récoltés
         endShellsText.text = score.ToString();
 
-        // Meilleur temps : "Best: 124s"
         string bestLabel = (lang == 1) ? "最高紀錄" : "Best";
         bestTimerText.text = $"{bestLabel}: {bestTime}s";
 
-        // 5. Activation du Panel
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
     }
@@ -248,7 +229,6 @@ public class WhackManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        // La musique sera relancée par le Start() au rechargement de la scène
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
