@@ -12,8 +12,8 @@ public class GachaponManager : MonoBehaviour
     public GameObject spinText;
 
     [Header("Listes de Collection")]
-    public List<CollectableItem> allFishes;  // Glisse tes poissons ici
-    public List<CollectableItem> allDecors;  // Glisse tes décors ici
+    public List<CollectableItem> allFishes;
+    public List<CollectableItem> allDecors;
 
     [Header("Animation")]
     public GameObject[] ballPrefabs;
@@ -35,18 +35,14 @@ public class GachaponManager : MonoBehaviour
     {
         if (isUiActive) return;
 
-        // 1. On vérifie si on a assez de coquillages
         if (DataManager.Instance != null && DataManager.Instance.SpendShells(5))
         {
             isUiActive = true;
             spinText.SetActive(false);
 
-            // 2. ON JOUE LE SON DE LA MANIVELLE ICI (À TOUS LES COUPS)
             if (AudioManager.Instance != null)
             {
-                // On peut appeler une fonction spécifique ou PlaySFX directement
                 AudioManager.Instance.PlaySFX(AudioManager.Instance.shellClip);
-                // Note: Remplace shellClip par crankClip si tu as créé la variable
             }
 
             StartCoroutine(AnimateBall());
@@ -57,47 +53,38 @@ public class GachaponManager : MonoBehaviour
     {
         CollectableItem wonItem = null;
 
-        // --- SYSTÈME DE TIRAGE SÉCURISÉ ---
         if (allFishes.Count > 0 && allDecors.Count > 0)
         {
-            // Si les deux listes sont remplies, on fait le 70/30 normal
             if (Random.value < 0.70f) wonItem = allFishes[Random.Range(0, allFishes.Count)];
             else wonItem = allDecors[Random.Range(0, allDecors.Count)];
         }
         else if (allFishes.Count > 0)
         {
-            // Si tu n'as QUE des poissons, on donne un poisson d'office
             wonItem = allFishes[Random.Range(0, allFishes.Count)];
         }
         else if (allDecors.Count > 0)
         {
-            // Si tu n'as QUE des décors, on donne un décor
             wonItem = allDecors[Random.Range(0, allDecors.Count)];
         }
         else
         {
-            // Si TOUT est vide, on arrête avant de crash
             Debug.LogError("ERREUR : Aucune fiche (Item) dans les listes AllFishes et AllDecors !");
             isUiActive = false;
             yield break;
         }
 
-        // --- CRÉATION BOULE ---
         int randomIndex = Random.Range(0, ballPrefabs.Length);
         currentBall = Instantiate(ballPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
 
-        // --- FIX CANVAS ---
         Canvas ballCanvas = currentBall.GetComponent<Canvas>();
         if (ballCanvas == null) ballCanvas = currentBall.AddComponent<Canvas>();
 
         ballCanvas.overrideSorting = true;
         ballCanvas.sortingOrder = 100;
 
-        // --- FIX PHYSIQUE ---
         Rigidbody2D rb = currentBall.GetComponent<Rigidbody2D>();
         if (rb != null) rb.isKinematic = true;
 
-        // --- ANIMATION ---
         float elapsed = 0;
         float duration = 1.2f;
         while (elapsed < duration)
@@ -110,18 +97,13 @@ public class GachaponManager : MonoBehaviour
             yield return null;
         }
 
-        // --- AFFICHAGE DU RÉSULTAT (Ligne 74 - Zone du crash) ---
-        // ... (après l'animation de la boule) ...
-
         Debug.Log("Fin de l'animation, tentative d'affichage du panel...");
 
-        // 1. ON VÉRIFIE D'ABORD SI L'ITEM EST NOUVEAU
         int dejaDebloque = PlayerPrefs.GetInt("Unlocked_" + wonItem.itemID, 0);
         bool isNew = (dejaDebloque == 0);
 
         Debug.Log("Item ID: " + wonItem.itemID + " | Est nouveau ? " + isNew);
 
-        // 2. ON PRÉPARE L'UI (Texte traduit et Image)
         if (resultNameText != null)
         {
             resultNameText.text = GetTranslatedItemName(wonItem.itemID);
@@ -132,7 +114,6 @@ public class GachaponManager : MonoBehaviour
             resultImage.sprite = wonItem.itemSprite;
         }
 
-        // 3. ON AFFICHE LE PANEL ET ON GÈRE LE "NEW" + SON
         if (prizePanel != null)
         {
             prizePanel.SetActive(true);
@@ -143,7 +124,6 @@ public class GachaponManager : MonoBehaviour
 
                 if (AudioManager.Instance != null)
                 {
-                    // Si tu n'entends rien, vérifie que 'gameOverClip' est bien rempli dans l'inspecteur de l'AudioManager
                     AudioManager.Instance.PlaySFX(AudioManager.Instance.gameOverClip);
                 }
             }
@@ -152,7 +132,6 @@ public class GachaponManager : MonoBehaviour
                 if (newTextObject != null) newTextObject.SetActive(false);
             }
 
-            // 4. SEULEMENT MAINTENANT ON SAUVEGARDE
             PlayerPrefs.SetInt("Unlocked_" + wonItem.itemID, 1);
             PlayerPrefs.Save();
         }
@@ -177,13 +156,12 @@ public class GachaponManager : MonoBehaviour
             case "plant_coral": return lang == 0 ? "Coral" : lang == 1 ? "珊瑚" : "Corail";
             case "plant_seaweed": return lang == 0 ? "Seaweed" : lang == 1 ? "海藻" : "Algue";
             case "plant_rock": return lang == 0 ? "Rock" : lang == 1 ? "岩石" : "Rocher";
-            default: return itemID; // Retourne l'ID brut si pas de traduction trouvée
+            default: return itemID;
         }
     }
 
     void UnlockItem(CollectableItem item)
     {
-        // On sauvegarde le fait qu'il est débloqué (1 = Vrai)
         PlayerPrefs.SetInt("Unlocked_" + item.itemID, 1);
         PlayerPrefs.Save();
         Debug.Log("Débloqué : " + item.itemName);
