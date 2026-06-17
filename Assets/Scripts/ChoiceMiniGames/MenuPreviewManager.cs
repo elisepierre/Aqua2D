@@ -113,7 +113,6 @@ public class MenuPreviewManager : MonoBehaviour
         SceneManager.LoadScene("WAMGameScene");
     }
 
-    // Petite fonction utilitaire pour éviter de répéter le code
     private void StopMusicBeforeLoading()
     {
         if (AudioManager.Instance != null)
