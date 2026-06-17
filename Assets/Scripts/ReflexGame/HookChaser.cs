@@ -9,7 +9,6 @@ public class HookChaser : MonoBehaviour
 
     void Awake()
     {
-        // 1. Auto-détection de la tête pour éviter les erreurs de lien
         if (hookHead == null)
         {
             hookHead = transform.Find("HookHead");
@@ -36,7 +35,6 @@ public class HookChaser : MonoBehaviour
     {
         Debug.Log("[DEBUG] Début de la pêche.");
 
-        // Geler le déchet
         Rigidbody2D rb = targetTrash.GetComponent<Rigidbody2D>();
         if (rb != null) { rb.isKinematic = true; rb.velocity = Vector2.zero; }
 
@@ -44,7 +42,6 @@ public class HookChaser : MonoBehaviour
         hookHead.position = transform.position;
         hookHead.gameObject.SetActive(true);
 
-        // Descente rapide
         while (hookHead.position.y > trashPos.y)
         {
             hookHead.position += new Vector3(0, -speed * Time.deltaTime, 0);
@@ -56,11 +53,9 @@ public class HookChaser : MonoBehaviour
             AudioManager.Instance.PlaySFX(AudioManager.Instance.trashClip);
         }
 
-        // Attraper
         targetTrash.transform.SetParent(hookHead);
         targetTrash.transform.localPosition = Vector3.zero;
 
-        // Remontée rapide
         while (hookHead.position.y < topY)
         {
             hookHead.position += new Vector3(0, speed * Time.deltaTime, 0);
@@ -68,6 +63,6 @@ public class HookChaser : MonoBehaviour
         }
 
         Destroy(targetTrash);
-        Destroy(gameObject); // On supprime le crochet
+        Destroy(gameObject);
     }
 }
