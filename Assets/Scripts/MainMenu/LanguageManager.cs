@@ -13,7 +13,6 @@ public class LanguageManager : MonoBehaviour
 
     private void Awake()
     {
-        // LE VIDEUR : Empêche les doublons et garde les réglages
         if (instance == null)
         {
             instance = this;
@@ -41,28 +40,23 @@ public class LanguageManager : MonoBehaviour
         if (AudioManager.Instance != null)
         {
             string name = scene.name;
-            Debug.Log("Scène chargée : " + name); // Pour vérifier le nom exact dans la console
+            Debug.Log("Scène chargée : " + name);
 
-            // GROUPE 1 : Musique du Menu (Main, Link, Choice, Gacha)
             if (name == "MainMenu" || name == "LinkScene" || name == "ChoiceScene" || name == "GachaponScene")
             {
-                // On ne relance que si ce n'est pas déjà le MenuMusic qui joue
                 if (AudioManager.Instance.musicSource.clip != AudioManager.Instance.menuMusic || !AudioManager.Instance.musicSource.isPlaying)
                 {
                     AudioManager.Instance.PlayMenuMusic();
                 }
             }
-            // GROUPE 2 : Musique Zen (Aquarium, Collection)
             else if (name == "AquariumScene" || name == "CollectionScene")
             {
                 AudioManager.Instance.PlayAquariumMusic();
             }
-            // GROUPE 3 : Musique de Jeu (Endless)
             else if (name == "EndlessGameScene")
             {
                 AudioManager.Instance.PlayEndlessMusic();
             }
-            // GROUPE 4 : Musique de Jeu (Reflex/Catch)
             else if (name == "ReflexGameScene")
             {
                 AudioManager.Instance.PlayCatchMusic();
@@ -72,12 +66,10 @@ public class LanguageManager : MonoBehaviour
 
     private void ReconnectLanguageButtons()
     {
-        // On récupère TOUS les boutons de la scène
         UnityEngine.UI.Button[] allButtons = Resources.FindObjectsOfTypeAll<UnityEngine.UI.Button>();
 
         foreach (var btn in allButtons)
         {
-            // --- 1. GESTION DES BOUTONS DE LANGUE (Ton code d'origine) ---
             if (btn.gameObject.name == "EnglishButton")
             {
                 btn.onClick.RemoveAllListeners();
@@ -94,14 +86,11 @@ public class LanguageManager : MonoBehaviour
                 btn.onClick.AddListener(() => SetLanguage(2));
             }
 
-            // --- 2. GESTION DU SON AUTOMATIQUE (Le nouvel ajout) ---
-            // On ajoute le son à TOUS les boutons sans supprimer les actions précédentes
             btn.onClick.RemoveListener(PlayButtonSound);
             btn.onClick.AddListener(PlayButtonSound);
         }
     }
 
-    // N'oublie pas de garder cette petite fonction juste en dessous
     private void PlayButtonSound()
     {
         if (AudioManager.Instance != null)
@@ -112,7 +101,6 @@ public class LanguageManager : MonoBehaviour
 
     public void SetLanguage(int index)
     {
-        // Sauvegarde immédiate dans la mémoire du téléphone/PC
         PlayerPrefs.SetInt("SelectedLanguage", index);
         PlayerPrefs.Save();
 
@@ -134,15 +122,12 @@ public class LanguageManager : MonoBehaviour
             txt.UpdateFontAsset();
         }
 
-        // --- SCENE : MAIN MENU ---
         TranslateByName("TXT_Play", lang == 0 ? "PLAY" : lang == 1 ? "開始遊戲" : "JOUER");
         TranslateByName("TXT_Continue", lang == 0 ? "CONTINUE" : lang == 1 ? "繼續" : "CONTINUER");
         TranslateByName("TXT_Settings", lang == 0 ? "LANGUAGE" : lang == 1 ? "語言" : "LANGUE");
         TranslateByName("TXT_French", lang == 0 ? "FRENCH" : lang == 1 ? "法文" : "FRANÇAIS");
         TranslateByName("TXT_English", lang == 0 ? "ENGLISH" : lang == 1 ? "英語" : "ANGLAIS");
         TranslateByName("TXT_Chinese", lang == 0 ? "CHINESE" : lang == 1 ? "繁體中文" : "CHINOIS TRAD.");
-
-        // --- SCENE : LINK SCENE ---
         TranslateByName("TXT_ChoiceTitle", lang == 0 ? "CHOOSE A MINI-GAME" : lang == 1 ? "選擇小遊戲" : "CHOISIS UN JEU");
         TranslateByName("TXT_Game1", lang == 0 ? "CLEAN OCEAN" : lang == 1 ? "清潔海洋" : "LAVER L'OCÉAN");
         TranslateByName("TXT_Game2", lang == 0 ? "SWIM RUSH" : lang == 1 ? "極速游泳" : "COURSE DE NAGE");
@@ -150,16 +135,9 @@ public class LanguageManager : MonoBehaviour
         TranslateByName("TXT_Minigames", lang == 0 ? "MINI-GAMES" : lang == 1 ? "小遊戲" : "MINI-JEUX");
         TranslateByName("TXT_Gachapon", lang == 0 ? "GACHAPON" : lang == 1 ? "扭蛋機" : "GACHAPON");
         TranslateByName("TXT_Aquarium", lang == 0 ? "AQUARIUM" : lang == 1 ? "水族箱" : "AQUARIUM");
-
-        // --- SCENE : GACHAPON SCENE ---
         TranslateByName("TXT_Spin", lang == 0 ? "SPIN FOR 5 SHELLS" : lang == 1 ? "花費 5 個貝殼旋轉" : "LANCER (5 COQUILLAGES)");
         TranslateByName("TXT_PrizeTitle", lang == 0 ? "NEW ITEM!" : lang == 1 ? "獲得新物品！" : "NOUVEL OBJET !");
-
-        // --- SCENE : COLLECTION SCENE ---
         TranslateByName("TXT_Collection", lang == 0 ? "COLLECTION" : lang == 1 ? "收藏展覽" : "COLLECTION");
-
-        // --- NOMS DES ITEMS (POUR GACHA & COLLECTION) ---
-        // Utilise l'ID de l'item défini dans ton ScriptableObject (ex: "fish_01")
         TranslateItemName("fish_blue", lang);
         TranslateItemName("fish_clown", lang);
         TranslateItemName("fish_diodon", lang);
@@ -169,27 +147,22 @@ public class LanguageManager : MonoBehaviour
         TranslateItemName("plant_coral", lang);
         TranslateItemName("plant_seaweed", lang);
         TranslateItemName("plant_rock", lang);
-        // Ajoute ici tous tes IDs d'items...
     }
 
     private void TranslateByName(string objName, string translation)
     {
-        // On cherche partout, même dans les objets désactivés
         TextMeshProUGUI[] allTexts = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>();
 
         foreach (var t in allTexts)
         {
-            // On vérifie si c'est le bon objet ET s'il appartient à la scène active
-            // (pour éviter de modifier des objets d'autres scènes en mémoire)
             if (t.gameObject.name == objName && t.gameObject.scene.isLoaded)
             {
                 t.text = translation;
-                return; // On a trouvé, on s'arrête
+                return;
             }
         }
     }
 
-    // Vérifie bien le mot "public" au début !
     public string GetTranslatedItemName(string itemID)
     {
         int lang = PlayerPrefs.GetInt("SelectedLanguage", 0);
@@ -222,16 +195,14 @@ public class LanguageManager : MonoBehaviour
             case "plant_coral": translation = (lang == 0 ? "Coral" : lang == 1 ? "珊瑚" : "Corail"); break;
             case "plant_seaweed": translation = (lang == 0 ? "Seaweed" : lang == 1 ? "海藻" : "Algue"); break;
             case "plant_rock": translation = (lang == 0 ? "Rock" : lang == 1 ? "岩石" : "Rocher"); break;
-            default: return; // Si l'ID est inconnu, on sort
+            default: return;
         }
 
-        // ON CHERCHE PARTOUT (Même les objets désactivés)
         TextMeshProUGUI[] allTexts = Resources.FindObjectsOfTypeAll<TextMeshProUGUI>();
         bool found = false;
 
         foreach (var txt in allTexts)
         {
-            // ATTENTION : On vérifie si le nom de l'objet est EXACTEMENT TXT_itemID
             if (txt.gameObject.name == "TXT_" + itemID)
             {
                 txt.text = translation;
@@ -249,7 +220,7 @@ public class LanguageManager : MonoBehaviour
 
     public string GetStoryDialog(int step, int lang)
     {
-        if (lang == 0) // English
+        if (lang == 0)
         {
             switch (step)
             {
@@ -261,7 +232,7 @@ public class LanguageManager : MonoBehaviour
                 default: return "";
             }
         }
-        else if (lang == 1) // Chinese
+        else if (lang == 1)
         {
             switch (step)
             {
@@ -273,7 +244,7 @@ public class LanguageManager : MonoBehaviour
                 default: return "";
             }
         }
-        else // lang == 2 : French
+        else
         {
             switch (step)
             {
