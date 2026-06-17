@@ -5,7 +5,7 @@ public class MainMenuManager : MonoBehaviour
 {
     void Start()
     {
-        Time.timeScale = 1f; // Sécurité absolue pour réveiller les boutons
+        Time.timeScale = 1f;
 
         if (AudioManager.Instance != null)
         {
