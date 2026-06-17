@@ -6,7 +6,7 @@ public class AquariumManager : MonoBehaviour
     public List<CollectableItem> allPossibleItems;
 
     [Header("Points de placement précis")]
-    public List<Transform> spawnPoints; // Glisse tous tes Empties ici
+    public List<Transform> spawnPoints;
 
     public GameObject fishPrefab;
     public GameObject staticPrefab;
@@ -24,12 +24,10 @@ public class AquariumManager : MonoBehaviour
             {
                 if (item.isFish)
                 {
-                    // Pour les poissons, on peut garder un spawn aléatoire
                     SpawnFish(item);
                 }
                 else
                 {
-                    // POUR LES PLANTES ET ROCHERS : Placement précis
                     SpawnStaticAtCorrectPoint(item);
                 }
             }
@@ -38,14 +36,12 @@ public class AquariumManager : MonoBehaviour
 
     void SpawnStaticAtCorrectPoint(CollectableItem item)
     {
-        // On cherche le point qui a le même ID dans son nom
         Transform targetPoint = spawnPoints.Find(p => p.name.Contains(item.itemID));
 
         if (targetPoint != null)
         {
             GameObject newStatic = Instantiate(staticPrefab, targetPoint.position, Quaternion.identity);
-
-            // Si tu es dans un Canvas, il faut définir le parent !
+            
             if (targetPoint.GetComponent<RectTransform>() != null)
             {
                 newStatic.transform.SetParent(targetPoint, false);
@@ -69,7 +65,6 @@ public class AquariumManager : MonoBehaviour
 
     void SpawnFish(CollectableItem item)
     {
-        // Code de spawn des poissons (aléatoire dans l'écran)
         GameObject newFish = Instantiate(fishPrefab, Vector3.zero, Quaternion.identity);
         newFish.GetComponent<SpriteRenderer>().sprite = item.itemSprite;
         newFish.GetComponent<SpriteRenderer>().sortingOrder = 20;
